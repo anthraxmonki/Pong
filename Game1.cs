@@ -52,7 +52,7 @@ namespace Pong
             this.graphics.PreferredBackBufferHeight = 500;
             iScreenWidth  = this.graphics.PreferredBackBufferWidth;
             iScreenHeight = this.graphics.PreferredBackBufferHeight;
-            rScreen = new Rectangle(0, 0, iScreenWidth, iScreenHeight);
+            rScreen = new Rectangle(0, 0, iScreenWidth, iScreenHeight);         
         }
 
 

@@ -67,13 +67,12 @@ namespace Pong
         {
 
 
-
         }
 
 
 
 
-        public void Draw(SpriteBatch thespriteBatch)
+        public virtual void Draw(SpriteBatch thespriteBatch)
         {
 
 
