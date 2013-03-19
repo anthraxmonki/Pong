@@ -11,6 +11,12 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Pong
 {
+    //TO-DO
+    //Add individual methods for each PAddle
+    //    left, right, top, bottom
+    //    so they can adjust the ball accordingly
+
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -161,13 +167,15 @@ namespace Pong
 
             if (oPaddleLeft.IsPaddleCollision(oBall.rBallRectangle) == true)
             {
-                oBall.v2BallPosition = oPaddleLeft.UpdatePaddleCollision(oBall.fSpeedX, oBall.fSpeedY, oBall.v2BallPosition, oBall.rBallRectangle);
+                oBall.v2BallPosition = oPaddleLeft.UpdatePaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
                 oBall.fSpeedX = oPaddleLeft.fBallSpeedX;
+
             }
 
             if (oPaddleRight.IsPaddleCollision(oBall.rBallRectangle) == true)
             {
-
+                oBall.v2BallPosition = oPaddleRight.UpdatePaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
+                oBall.fSpeedX = oPaddleRight.fBallSpeedX;
             }
 
 

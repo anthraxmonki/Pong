@@ -53,7 +53,7 @@ namespace Pong
 
         public void Update(GameTime thegameTime)
         {
-
+            
 
             ScreenCollision();
 
