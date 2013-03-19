@@ -167,14 +167,17 @@ namespace Pong
 
             if (oPaddleLeft.IsPaddleCollision(oBall.rBallRectangle) == true)
             {
-                oBall.v2BallPosition = oPaddleLeft.UpdatePaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
+                oBall.v2BallPosition = oPaddleLeft.LeftPaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
+                //oBall.v2BallPosition = oPaddleLeft.UpdatePaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
                 oBall.fSpeedX = oPaddleLeft.fBallSpeedX;
 
             }
 
             if (oPaddleRight.IsPaddleCollision(oBall.rBallRectangle) == true)
             {
-                oBall.v2BallPosition = oPaddleRight.UpdatePaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
+
+                oBall.v2BallPosition = oPaddleRight.RightPaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
+                //oBall.v2BallPosition = oPaddleRight.UpdatePaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
                 oBall.fSpeedX = oPaddleRight.fBallSpeedX;
             }
 

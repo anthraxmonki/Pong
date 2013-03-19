@@ -83,22 +83,6 @@ namespace Pong
 
 
 
-        public Vector2 UpdatePaddleCollision(float fballSpeed, Vector2 v2ballPosition, Rectangle rballSource)
-        {
-            Vector2 v2ReturnedBallPosition;
-
-            if (IsPaddleCollision(rballSource) == true)
-            {
-                v2ReturnedBallPosition = CollisionLogic(fballSpeed, v2ballPosition, rballSource);
-
-                return v2ReturnedBallPosition;
-            }
-
-            return v2ballPosition;
-        }
-
-
-
 
 
 
@@ -118,28 +102,53 @@ namespace Pong
 
 
 
+        //public Vector2 UpdatePaddleCollision(float fballSpeed, Vector2 v2ballPosition, Rectangle rballSource)
+        //{
+        //    Vector2 v2ReturnedBallPosition;
+
+        //    if (IsPaddleCollision(rballSource) == true)
+        //    {
+        //        v2ReturnedBallPosition = LeftPaddleCollision(fballSpeed, v2ballPosition, rballSource);
+
+        //        return v2ReturnedBallPosition;
+        //    }
+
+        //    return v2ballPosition;
+        //}
 
 
 
 
-        public Vector2 CollisionLogic(float fballSpeed, Vector2 v2ballPosition, Rectangle rballSource)
+
+
+
+
+        //Left Paddle Left Paddle Left Paddle
+        public Vector2 LeftPaddleCollision(float fballSpeed, Vector2 v2ballPosition, Rectangle rballRectangle)
         {
-
-            if (rballSource.Intersects(rSpriteSource)
-                && rballSource.Left < rSpriteSource.Right)
+            if (rballRectangle.Intersects(rSpriteSource)
+                && rballRectangle.Left < rSpriteSource.Right)
             {
                 //Don't go through the paddle. Ever.
                 v2ballPosition = new Vector2(rSpriteSource.Right, v2ballPosition.Y);
 
                 fBallSpeedX = fballSpeed * -1;
-
-                this.fBallSpeedX = fballSpeed;
             }
-
             return v2ballPosition;
+        }
 
+        //RIGHT PADDLE RIGHT PADDLE RIGHT PADDLE
+        public Vector2 RightPaddleCollision(float fballSpeed, Vector2 v2ballPosition, Rectangle rballRectangle)
+        {
+            if (rballRectangle.Intersects(rSpriteSource)
+                && rballRectangle.Right > rSpriteSource.Left)
+            {
+                //Don't go through the paddle. Ever.
+                v2ballPosition = new Vector2(rSpriteSource.Left - rballRectangle.Width, v2ballPosition.Y);
 
-
+                fBallSpeedX = fballSpeed * -1;
+            }
+            return v2ballPosition;
         }
 
 
