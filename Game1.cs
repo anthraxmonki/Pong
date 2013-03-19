@@ -163,7 +163,7 @@ namespace Pong
 
             oBall.Update(gameTime);
 
-            LetsTrySomeAI();
+            //LetsTrySomeAI();
 
             oPaddleLeft.Update (gameTime);
             oPaddleRight.Update(gameTime);

@@ -20,8 +20,8 @@ namespace Pong
 
     class Ball : Sprite
     {
-        const float fSpeedMaxX = 1000;
-        const float fSpeedMaxY = 500;
+        const float fSpeedMaxX = 700;
+        const float fSpeedMaxY = 422;
 
 
 
@@ -49,12 +49,21 @@ namespace Pong
 
             base.LoadContent(thecontentManager, sfileName);
 
-            v2BallPosition = new Vector2(Game1.iScreenWidth / 2  - tSprite.Width  / 2,
-                                         Game1.iScreenHeight / 2 - tSprite.Height / 2);
+            InstantiateBall();
+        }
 
-            
+
+
+
+        public void InstantiateBall()
+        {
+            v2BallPosition = new Vector2(Game1.iScreenWidth / 2 - tSprite.Width / 2,
+                             Game1.iScreenHeight / 2 - tSprite.Height / 2);
+
+
+
             iRandom = oRandom.Next(350, 425);
-            fSpeedX =  iRandom;
+            fSpeedX = iRandom;
             iRandom = oRandom.Next(-2, 2);
             if (iRandom < 0)
             {
@@ -72,9 +81,9 @@ namespace Pong
             }
 
 
-
-
         }
+
+
 
 
 
@@ -82,7 +91,9 @@ namespace Pong
         {
             
 
-            ScreenCollision();
+            //ScreenCollision();
+
+
 
 
             v2BallPosition += new Vector2(fSpeedX * (float)thegameTime.ElapsedGameTime.TotalSeconds, 
@@ -92,7 +103,42 @@ namespace Pong
                                             rSpriteSource.Width, rSpriteSource.Height);
             rBallRectangle = rSpriteSource;
 
+
+
+            ResetBallCollision();
+
         }
+
+
+
+        public void ResetBallCollision()
+        {
+            if (rSpriteSource.Left < Game1.rScreen.Left)
+            {
+                InstantiateBall();
+            }
+
+            else if (rSpriteSource.Right > Game1.rScreen.Right)
+            {
+                InstantiateBall();
+            }
+
+            else if (rSpriteSource.Top < Game1.rScreen.Top)
+            {
+                InstantiateBall();
+            }
+
+            else if (rSpriteSource.Bottom > Game1.rScreen.Bottom)
+            {
+                InstantiateBall();
+            }
+
+
+        }
+
+
+
+
 
 
         //Bounce off the screen
