@@ -153,12 +153,33 @@ namespace Pong
             ksPreviousState = ksCurrentState;
             ksCurrentState  = Keyboard.GetState();
 
+
+
+
+            //oBall.v2BallPosition = oPaddleLeft.UpdatePaddleCollision(oBall.fSpeedX, oBall.fSpeedY, oBall.v2BallPosition, oBall.rBallRectangle);
+            //oBall.fSpeedX = oPaddleLeft.fBallSpeedX;
+
+            if (oPaddleLeft.IsPaddleCollision(oBall.rBallRectangle) == true)
+            {
+                oBall.v2BallPosition = oPaddleLeft.UpdatePaddleCollision(oBall.fSpeedX, oBall.fSpeedY, oBall.v2BallPosition, oBall.rBallRectangle);
+                oBall.fSpeedX = oPaddleLeft.fBallSpeedX;
+            }
+
+            if (oPaddleRight.IsPaddleCollision(oBall.rBallRectangle) == true)
+            {
+
+            }
+
+
+
+            oBall.Update(gameTime);
+
             oPaddleLeft.Update (gameTime);
             oPaddleRight.Update(gameTime);
             oPaddleBottom.Update(gameTime);
             oPaddleTop.Update(gameTime);
 
-            oBall.Update(gameTime);
+
 
             base.Update(gameTime);
         }

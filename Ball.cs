@@ -21,13 +21,18 @@ namespace Pong
     class Ball : Sprite
     {
         static Random oRandom = new Random();
-        Vector2 v2BallPosition;
+        public Vector2 v2BallPosition;
 
         static int iRandom;
 
-        float fSpeedX;
-        float fSpeedY;
+        public float fSpeedX;
+        public float fSpeedY;
         float fSpeedIncrementer;
+
+
+        public Rectangle rBallRectangle;
+  
+
 
         public void LoadContent(ContentManager thecontentManager, string sfileName)
         {
@@ -58,7 +63,7 @@ namespace Pong
 
             rSpriteSource = new Rectangle((int)v2BallPosition.X, (int)v2BallPosition.Y, 
                                             rSpriteSource.Width, rSpriteSource.Height);
-
+            rBallRectangle = rSpriteSource;
 
         }
 

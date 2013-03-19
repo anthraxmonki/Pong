@@ -31,7 +31,7 @@ namespace Pong
         Keys oLeftKey;
 
         float fPaddleSpeed = 240;
-
+        public float fBallSpeedX;
 
 
         public void LoadContent(ContentManager thecontentManager, string sfileName)
@@ -68,15 +68,85 @@ namespace Pong
 
 
 
+
+
         public void Update(GameTime thegameTime)
         {
+            rSpriteSource = new Rectangle((int)v2PaddlePosition.X, (int)v2PaddlePosition.Y,
+                                rSpriteSource.Width, rSpriteSource.Height);
+
+
+
             MovePaddle(thegameTime);
 
+        }
 
+
+
+        public Vector2 UpdatePaddleCollision(float fballSpeedX, float fballSpeedY, Vector2 v2ballPosition, Rectangle rballSource)
+        {
+            Vector2 v2ReturnedBallPosition;
+
+            if (IsPaddleCollision(rballSource) == true)
+            {
+                v2ReturnedBallPosition = CollisionLogic(fballSpeedX, fballSpeedY, v2ballPosition, rballSource);
+
+                return v2ReturnedBallPosition;
+            }
+
+            return v2ballPosition;
+        }
+
+
+
+
+
+
+
+        public bool IsPaddleCollision(Rectangle rballSource)
+        {
+            if (rSpriteSource.Intersects(rballSource))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
+
+
+
+
+
+        public Vector2 CollisionLogic(float fballSpeedX, float fballSpeedY, Vector2 v2ballPosition, Rectangle rballSource)
+        {
+
+            if (rballSource.Intersects(rSpriteSource)
+                && rballSource.Left < rSpriteSource.Right)
+            {
+                //Don't go through the paddle. Ever.
+                v2ballPosition = new Vector2(rSpriteSource.Right, v2ballPosition.Y);
+
+                fballSpeedX = fballSpeedX * -1;
+
+                this.fBallSpeedX = fballSpeedX;
+            }
+
+            return v2ballPosition;
 
 
 
         }
+
+
+
+
+
+
 
 
 
@@ -146,9 +216,9 @@ namespace Pong
         public void Draw(SpriteBatch thespriteBatch)
         {
 
-            thespriteBatch.Draw(tSprite, v2PaddlePosition, rSpriteSource, Color.White);
+            //thespriteBatch.Draw(tSprite, v2PaddlePosition, rSpriteSource, Color.White);
             //thespriteBatch.Draw(tSprite, v2PaddlePosition, rSpriteSource, Color.White, 0.0f, Vector2.Zero, fSpriteScale, SpriteEffects.None, 1.0f);
-
+            thespriteBatch.Draw(tSprite, rSpriteSource, Color.White);
 
         }
 
