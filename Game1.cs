@@ -147,11 +147,9 @@ namespace Pong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
             // Allows the game to exit
             //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
             //    this.Exit();
-
 
             //This order is important.  
             //    If you get the current state
@@ -160,33 +158,12 @@ namespace Pong
             ksCurrentState  = Keyboard.GetState();
 
 
-
-
-            if (oPaddleLeft.IsPaddleCollision(oBall.rBallRectangle) == true)
-            {
-                oBall.v2BallPosition = oPaddleLeft.LeftPaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
-                oBall.fSpeedX = oPaddleLeft.fBallSpeedX;
-            }
-            else if (oPaddleRight.IsPaddleCollision(oBall.rBallRectangle) == true)
-            {
-                oBall.v2BallPosition = oPaddleRight.RightPaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
-                oBall.fSpeedX = oPaddleRight.fBallSpeedX;
-            }
-            else if (oPaddleBottom.IsPaddleCollision(oBall.rBallRectangle) == true)
-            {
-                oBall.v2BallPosition = oPaddleBottom.BottomPaddleCollision(oBall.fSpeedY, oBall.v2BallPosition, oBall.rBallRectangle);
-                oBall.fSpeedY = oPaddleBottom.fBallSpeedY;
-            }
-            else if (oPaddleTop.IsPaddleCollision(oBall.rBallRectangle) == true)
-            {
-                oBall.v2BallPosition = oPaddleTop.TopPaddleCollision(oBall.fSpeedY, oBall.v2BallPosition, oBall.rBallRectangle);
-                oBall.fSpeedY = oPaddleTop.fBallSpeedY;
-            }
-
-
+            CheckPaddleCollisions();
 
 
             oBall.Update(gameTime);
+
+
 
             oPaddleLeft.Update (gameTime);
             oPaddleRight.Update(gameTime);
@@ -199,50 +176,40 @@ namespace Pong
         }
 
 
-        ////check to see if the key is held down 
-        //public bool IsHeld(Keys key)
-        //{
-        //    if (ksCurrentState.IsKeyDown(key))
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
+
+        public void CheckPaddleCollisions()
+        {
+            if (oPaddleLeft.IsPaddleCollision(oBall.rBallRectangle) == true)
+            {
+                oBall.v2BallPosition = oPaddleLeft.LeftPaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
+                oBall.fSpeedX = Paddle.fBallSpeedX;
+                oBall.BallSpeedIncrementX();
+            }
+            else if (oPaddleRight.IsPaddleCollision(oBall.rBallRectangle) == true)
+            {
+                oBall.v2BallPosition = oPaddleRight.RightPaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
+                oBall.fSpeedX = Paddle.fBallSpeedX;
+                oBall.BallSpeedIncrementX();
+            }
+            else if (oPaddleBottom.IsPaddleCollision(oBall.rBallRectangle) == true)
+            {
+                oBall.v2BallPosition = oPaddleBottom.BottomPaddleCollision(oBall.fSpeedY, oBall.v2BallPosition, oBall.rBallRectangle);
+                oBall.fSpeedY = Paddle.fBallSpeedY;
+                oBall.BallSpeedIncrementY();
+            }
+            else if (oPaddleTop.IsPaddleCollision(oBall.rBallRectangle) == true)
+            {
+                oBall.v2BallPosition = oPaddleTop.TopPaddleCollision(oBall.fSpeedY, oBall.v2BallPosition, oBall.rBallRectangle);
+                oBall.fSpeedY = Paddle.fBallSpeedY;
+                oBall.BallSpeedIncrementY();
+            }
+
+
+        }
 
 
 
-        ////Check to see if the key was jsut released
-        //public bool IsReleased(Keys key)
-        //{
-        //    if (ksCurrentState.IsKeyUp(key)
-        //        && ksPreviousState.IsKeyDown(key))
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-   
 
-        //}
-
-
-        //public bool JustPressed(Keys key)
-        //{
-        //    if (ksCurrentState.IsKeyDown(key)
-        //        && ksPreviousState.IsKeyUp(key))
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
 
 
 

@@ -31,8 +31,8 @@ namespace Pong
         Keys oLeftKey;
 
         float fPaddleSpeed = 240;
-        public float fBallSpeedX;
-        public float fBallSpeedY;
+        public static float fBallSpeedX;
+        public static float fBallSpeedY;
 
         public void LoadContent(ContentManager thecontentManager, string sfileName)
         {

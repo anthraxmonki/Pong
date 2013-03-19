@@ -20,6 +20,11 @@ namespace Pong
 
     class Ball : Sprite
     {
+        const float fSpeedMaxX = 1000;
+        const float fSpeedMaxY = 500;
+
+
+
         static Random oRandom = new Random();
         public Vector2 v2BallPosition;
 
@@ -27,13 +32,18 @@ namespace Pong
 
         public float fSpeedX;
         public float fSpeedY;
-        float fSpeedIncrementer;
+        public float fSpeedIncrementer;
+
+
+
 
 
         public Rectangle rBallRectangle;
   
 
-
+        //Instantiate the ball's sprite characteristics
+        //    Randomize the ball direction
+        //    while maintaing a playable speed and angle
         public void LoadContent(ContentManager thecontentManager, string sfileName)
         {
 
@@ -42,11 +52,28 @@ namespace Pong
             v2BallPosition = new Vector2(Game1.iScreenWidth / 2  - tSprite.Width  / 2,
                                          Game1.iScreenHeight / 2 - tSprite.Height / 2);
 
-
+            
             iRandom = oRandom.Next(350, 425);
             fSpeedX =  iRandom;
+            iRandom = oRandom.Next(-2, 2);
+            if (iRandom < 0)
+            {
+                fSpeedX *= -1;
+            }
+
+
+
             iRandom = oRandom.Next(250, 450);
             fSpeedY = iRandom;
+            iRandom = oRandom.Next(-2, 2);
+            if (iRandom < 0)
+            {
+                fSpeedY *= -1;
+            }
+
+
+
+
         }
 
 
@@ -75,12 +102,50 @@ namespace Pong
             if (rSpriteSource.Left     < Game1.rScreen.Left)
             {
                 v2BallPosition = new Vector2(Game1.rScreen.Left, v2BallPosition.Y);
-
                 fSpeedX = fSpeedX * -1;
+
+                BallSpeedIncrementX();
+            }
+
+            else if (rSpriteSource.Right > Game1.rScreen.Right)
+            {
+                v2BallPosition = new Vector2(Game1.rScreen.Right - rSpriteSource.Width, v2BallPosition.Y);
+                fSpeedX = fSpeedX * -1;
+
+                BallSpeedIncrementX();
+            }
+
+            else if (rSpriteSource.Top < Game1.rScreen.Top)
+            {
+                v2BallPosition = new Vector2(v2BallPosition.X, Game1.rScreen.Top);
+                fSpeedY = fSpeedY * -1;
+
+                BallSpeedIncrementY();
+            }
+
+            else if (rSpriteSource.Bottom > Game1.rScreen.Bottom)
+            {
+                v2BallPosition = new Vector2(v2BallPosition.X, Game1.rScreen.Bottom - rSpriteSource.Height);
+                fSpeedY = fSpeedY * -1;
+
+                BallSpeedIncrementY();
+            }
+        }
+
+
+
+
+        //Check if fSpeed is Negative
+        //    Increment accordingly
+
+        public void BallSpeedIncrementX()
+        {
+
+            if(fSpeedX < fSpeedMaxX && fSpeedX > -fSpeedMaxX)
 
                 iRandom = oRandom.Next(13, 37);
                 fSpeedIncrementer = iRandom;
-                //Check if fSpeedX is Negative
+ 
                 if (fSpeedX < 0)
                 {
                     fSpeedX += -fSpeedIncrementer;
@@ -89,88 +154,33 @@ namespace Pong
                 {
                     fSpeedX += fSpeedIncrementer;
                 }
-            }
+        }
 
-            else if (rSpriteSource.Right > Game1.rScreen.Right)
+
+        public void BallSpeedIncrementY()
+        {
+            if (fSpeedY < fSpeedMaxY && fSpeedY > -fSpeedMaxY)
             {
-                v2BallPosition = new Vector2(Game1.rScreen.Right - rSpriteSource.Width, v2BallPosition.Y);
-
-                fSpeedX = fSpeedX * -1;
-
                 iRandom = oRandom.Next(13, 37);
                 fSpeedIncrementer = iRandom;
 
-                if (fSpeedX < 0)
+                if (fSpeedY < 0)
                 {
-
                     fSpeedY += -fSpeedIncrementer;
                 }
                 else
                 {
-
                     fSpeedY += fSpeedIncrementer;
                 }
             }
-
-            else if (rSpriteSource.Top < Game1.rScreen.Top)
-            {
-                v2BallPosition = new Vector2(v2BallPosition.X, Game1.rScreen.Top);
-
-
-                fSpeedY = fSpeedY * -1;
-
-                iRandom = oRandom.Next(13, 37);
-                fSpeedIncrementer = iRandom;
-
-                if (fSpeedX < 0)
-                {
-                    fSpeedY += (-fSpeedIncrementer);
-                }
-                else
-                {
-                    fSpeedY += fSpeedIncrementer;
-                }
-
-            }
-
-            else if (rSpriteSource.Bottom > Game1.rScreen.Bottom)
-            {
-                v2BallPosition = new Vector2(v2BallPosition.X, Game1.rScreen.Bottom - rSpriteSource.Height);
-
-                fSpeedY = fSpeedY * -1;
-
-                iRandom = oRandom.Next(13, 37);
-                fSpeedIncrementer = iRandom;
-
-                if (fSpeedX < 0)
-                {
-                    fSpeedY -= fSpeedIncrementer;
-                }
-                else
-                {
-                    fSpeedY += fSpeedIncrementer;
-                }
-
-            }
-
-
-
-
-
 
         }
-
-
-
 
 
 
         public void Draw(SpriteBatch thespriteBatch)
         {
 
-
-            //thespriteBatch.Draw(tSprite, v2BallPosition, rSpriteSource, Color.White);
-            //thespriteBatch.Draw(tSprite, v2BallPosition, rSpriteSource, Color.White, 0.0f, Vector2.Zero, fSpriteScale, SpriteEffects.None, 1.0f);
             thespriteBatch.Draw(tSprite, rSpriteSource, Color.White);
 
             base.Draw(thespriteBatch);
