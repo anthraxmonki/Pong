@@ -162,24 +162,27 @@ namespace Pong
 
 
 
-            //oBall.v2BallPosition = oPaddleLeft.UpdatePaddleCollision(oBall.fSpeedX, oBall.fSpeedY, oBall.v2BallPosition, oBall.rBallRectangle);
-            //oBall.fSpeedX = oPaddleLeft.fBallSpeedX;
-
             if (oPaddleLeft.IsPaddleCollision(oBall.rBallRectangle) == true)
             {
                 oBall.v2BallPosition = oPaddleLeft.LeftPaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
-                //oBall.v2BallPosition = oPaddleLeft.UpdatePaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
                 oBall.fSpeedX = oPaddleLeft.fBallSpeedX;
-
             }
-
-            if (oPaddleRight.IsPaddleCollision(oBall.rBallRectangle) == true)
+            else if (oPaddleRight.IsPaddleCollision(oBall.rBallRectangle) == true)
             {
-
                 oBall.v2BallPosition = oPaddleRight.RightPaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
-                //oBall.v2BallPosition = oPaddleRight.UpdatePaddleCollision(oBall.fSpeedX, oBall.v2BallPosition, oBall.rBallRectangle);
                 oBall.fSpeedX = oPaddleRight.fBallSpeedX;
             }
+            else if (oPaddleBottom.IsPaddleCollision(oBall.rBallRectangle) == true)
+            {
+                oBall.v2BallPosition = oPaddleBottom.BottomPaddleCollision(oBall.fSpeedY, oBall.v2BallPosition, oBall.rBallRectangle);
+                oBall.fSpeedY = oPaddleBottom.fBallSpeedY;
+            }
+            else if (oPaddleTop.IsPaddleCollision(oBall.rBallRectangle) == true)
+            {
+                oBall.v2BallPosition = oPaddleTop.TopPaddleCollision(oBall.fSpeedY, oBall.v2BallPosition, oBall.rBallRectangle);
+                oBall.fSpeedY = oPaddleTop.fBallSpeedY;
+            }
+
 
 
 
