@@ -140,12 +140,11 @@ namespace Pong
 
         public void BallSpeedIncrementX()
         {
+            iRandom = oRandom.Next(13, 37);
+            fSpeedIncrementer = iRandom;
 
-            if(fSpeedX < fSpeedMaxX && fSpeedX > -fSpeedMaxX)
-
-                iRandom = oRandom.Next(13, 37);
-                fSpeedIncrementer = iRandom;
- 
+            if (fSpeedX < fSpeedMaxX && fSpeedX > -fSpeedMaxX)
+            {
                 if (fSpeedX < 0)
                 {
                     fSpeedX += -fSpeedIncrementer;
@@ -154,16 +153,28 @@ namespace Pong
                 {
                     fSpeedX += fSpeedIncrementer;
                 }
+            }
+
+            else
+            {
+                fSpeedX += -iRandom;
+            }
+
+
         }
 
 
+        //the outside Else clause if made to 
+        //   keep the ball out of a ricochet loop
+        //the outside Else will also slightly increase
+        //    over the Mx speed, and this is okay.
         public void BallSpeedIncrementY()
         {
+            iRandom = oRandom.Next(13, 37);
+            fSpeedIncrementer = iRandom;
+
             if (fSpeedY < fSpeedMaxY && fSpeedY > -fSpeedMaxY)
             {
-                iRandom = oRandom.Next(13, 37);
-                fSpeedIncrementer = iRandom;
-
                 if (fSpeedY < 0)
                 {
                     fSpeedY += -fSpeedIncrementer;
@@ -172,6 +183,11 @@ namespace Pong
                 {
                     fSpeedY += fSpeedIncrementer;
                 }
+
+            }
+            else
+            {
+                fSpeedY += -iRandom + -50;
             }
 
         }
