@@ -21,7 +21,7 @@ namespace Pong
         //KeyboardState ksCurrentState = Keyboard.GetState();
 
 
-        Vector2 v2PaddlePosition;
+        public Vector2 v2PaddlePosition;
 
 
 
@@ -33,6 +33,10 @@ namespace Pong
         float fPaddleSpeed = 240;
         public static float fBallSpeedX;
         public static float fBallSpeedY;
+
+
+
+
 
         public void LoadContent(ContentManager thecontentManager, string sfileName)
         {

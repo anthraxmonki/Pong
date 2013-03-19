@@ -163,7 +163,7 @@ namespace Pong
 
             oBall.Update(gameTime);
 
-
+            LetsTrySomeAI();
 
             oPaddleLeft.Update (gameTime);
             oPaddleRight.Update(gameTime);
@@ -173,6 +173,18 @@ namespace Pong
 
 
             base.Update(gameTime);
+        }
+
+
+
+        public void LetsTrySomeAI()
+        {
+            oPaddleLeft.v2PaddlePosition = new Vector2(oPaddleLeft.v2PaddlePosition.X, oBall.rBallRectangle.Y);
+            oPaddleRight.v2PaddlePosition = new Vector2(oPaddleRight.v2PaddlePosition.X, oBall.rBallRectangle.Y);
+            oPaddleBottom.v2PaddlePosition = new Vector2(oBall.rBallRectangle.X, oPaddleBottom.v2PaddlePosition.Y);
+            oPaddleTop.v2PaddlePosition = new Vector2(oBall.rBallRectangle.X, oPaddleTop.v2PaddlePosition.Y);
+
+
         }
 
 
